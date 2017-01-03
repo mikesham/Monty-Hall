@@ -1,13 +1,14 @@
 import java.util.Random;
 
 public class Host {
+	private Random rand = new Random ();
 	private String[][] doors = { {"  1   ", " Goat "},
 								{"  2   ", " Goat "},
 								{"  3   ", " Goat "} };
-	private int winningDoor;
 	private boolean[] openDoors = {false,
 								false,
 								false};
+	private int winningDoor;
 	
 	public Host() {
 		this.winningDoor = setWinningDoor();
@@ -15,9 +16,7 @@ public class Host {
 	}	
 	
 	private int setWinningDoor() {
-		Random rand = new Random();
-		int prizeNum = rand.nextInt(3);
-		
+		int prizeNum = rand.nextInt(3);		
 		return prizeNum;
 	}
 	
@@ -32,23 +31,11 @@ public class Host {
 	}
 	
 	public boolean[] openDoor(boolean[] openDoors, int pickedDoor) {
-		Random rand = new Random ();
-		if (pickedDoor == this.winningDoor) {
-			switch(pickedDoor) {
-				case 0:
-					openDoors[rand.nextInt(2) + 1] = true;
-					break;
-				case 1:
-					int roll = rand.nextInt(2);
-					if(roll == 1) {
-						roll++;
-					}
-					openDoors[roll] = true;
-					break;
-				case 2:
-					openDoors[rand.nextInt(2)] = true;
-					break;
-			}			
+		if (pickedDoor == this.winningDoor) {			
+			int door = rand.nextInt(3);
+			int i = (pickedDoor == door) ? (door + 1) % 3 : door;
+			openDoors[i] = true;
+			
 		} else {
 			for (int i = 0; i < 3; i++) {
 				if ( (i != pickedDoor) && (i != this.winningDoor) ) {

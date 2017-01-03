@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class StatTracker {
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
 	private Host host;
 	private Guesser guesser;
 	private int totalGames;

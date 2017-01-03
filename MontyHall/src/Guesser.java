@@ -2,8 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Guesser {
-	Scanner scanner = new Scanner(System.in);
-	Random rand = new Random();
+	private Scanner scanner = new Scanner(System.in);
+	private Random rand = new Random();
 	private Host host;
 	private String[] DOOR_CONTROL = {"closed",
 									" open ",
@@ -44,7 +44,7 @@ public class Guesser {
 			}
 		} 
 		// if a door is picked do you want to switch?
-		else if (this.switchDoor == "zero") {
+		else if (this.switchDoor.equals("zero")) {
 			switchDoor(automated, staySwitch);
 		// open picked door
 		} else {
@@ -94,10 +94,9 @@ public class Guesser {
 		}
 		switch(this.switchDoor) {
 			case "y":
-				int originalPick = this.pickedDoor;
+				this.pickedDoorBool[this.pickedDoor] = false;
 				this.pickedDoor = host.switchDoor(this.openDoors, this.pickedDoor);				
 				this.pickedDoorBool[this.pickedDoor] = true;
-				this.pickedDoorBool[originalPick] = false;
 				break;
 			default:
 				break;
